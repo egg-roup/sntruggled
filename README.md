@@ -1,5 +1,4 @@
-# vr-lab-project
-# Virtual Reality (VR) FPS Game
+# vr-lab-project: Virtual Reality (VR) FPS Game
 
 ## Overview
 **Generic Game Name** is a VR zombie survival game where you and your stuffed animal friends 
