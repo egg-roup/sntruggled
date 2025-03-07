@@ -1,7 +1,7 @@
 # vr-lab-project: Virtual Reality (VR) FPS Game
 
 ## Overview
-**Generic Game Name** is a VR zombie survival game where you and your stuffed animal friends 
+**Sntruggled** is a VR zombie survival game where you and your stuffed animal friends 
 fight off endless waves of toys using various toy gun weapons. Set in a world where you are a stuffed animal in a toy store, you must find “a way out” through aim and exploration.
 
 ## Game Components
