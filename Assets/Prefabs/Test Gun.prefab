@@ -397,13 +397,25 @@ MonoBehaviour:
   bulletSpeed: 20
   gunRb: {fileID: 4056702764649363512}
   grabInteractable: {fileID: 7756028398094593068}
-  triggerAction:
+  leftTriggerAction:
     m_UseReference: 0
     m_Action:
-      m_Name: Trigger
+      m_Name: Left Trigger
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 819e53ef-f8ce-4588-853e-815cc0547f2d
+      m_Id: 4d121040-2a5d-45b3-96c8-c2e4ec4ad085
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  rightTriggerAction:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Right Trigger
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 53a29371-449b-4b6b-bf12-3e18cd2595bb
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []

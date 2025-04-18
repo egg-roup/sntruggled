@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.XR; 
 
 public class BaseGun : MonoBehaviour
 {
@@ -16,91 +14,168 @@ public class BaseGun : MonoBehaviour
     public GameObject bulletPrefab;
     public Transform firePoint;
     public float bulletSpeed = 20f;
-
+    
     [Header("References")]
     public Rigidbody gunRb;
     public UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable grabInteractable;
-
+    
     private int currentClip;
-    public InputActionProperty leftTriggerAction;
-    public InputActionProperty rightTriggerAction;
-
-
     private bool isHeld = false;
-
-
+    
     void Start()
     {
         currentClip = clipSize;
-
-        // Subscribe to grab events
+        
+        // Create a test bullet prefab if none is assigned
+        if (bulletPrefab == null)
+        {
+            Debug.LogWarning("No bullet prefab assigned! Creating a simple sphere bullet for testing.");
+            CreateSimpleBulletPrefab();
+        }
+        
+        // Make sure firePoint exists
+        if (firePoint == null)
+        {
+            Debug.LogWarning("No fire point assigned! Creating a default one at the front of the gun.");
+            CreateDefaultFirePoint();
+        }
+        
+        // Subscribe to grab, release, and activate events
         if (grabInteractable != null)
         {
             grabInteractable.selectEntered.AddListener(OnGrab);
             grabInteractable.selectExited.AddListener(OnRelease);
+            //grabInteractable.activated.AddListener(OnActivate);
         }
-    }
-
-    public void Fire()
-    {
-            
-        //do the clip later      
-        // if (currentClip <= 0)
-        // {
-        //     OnEmpty();
-        //     return;
-        // }
-        //
-        //currentClip--;
-
-        // Spawn bullet
-        Vector3 spawnPos = firePoint.position + firePoint.forward * 0.1f;
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation * bulletPrefab.transform.localRotation);
-
-        Rigidbody rb = bullet.GetComponent<Rigidbody>();
-        if (rb != null)
-            rb.velocity = firePoint.forward * bulletSpeed;
-
-        // Set bullet damage
-        Bullet bulletScript = bullet.GetComponent<Bullet>();
-        if (bulletScript != null)
-            bulletScript.damage = bulletDamage;
-
-        //OnShoot();
-    }
-    //do reload later
-    // public void Reload()
-    // {
-    //     int needed = clipSize - currentClip;
-    //     int toReload = Mathf.Min(needed, totalAmmo);
-    //     currentClip += toReload;
-    //     totalAmmo -= toReload;
-    // }
-
-    // Placeholder to be filled in by teammate
-    // public virtual void OnShoot()
-    // {
-    //     Debug.Log("Play shoot audio here.");
-    // }
-
-    // Called when no bullets
-    public virtual void OnEmpty()
-    {
-        Debug.Log("Play empty audio here.");
+        else
+        {
+            Debug.LogError("XRGrabInteractable not assigned to gun!");
+        }
     }
 
     private void OnGrab(SelectEnterEventArgs args)
     {
         isHeld = true;
         gunRb.isKinematic = true;
+        Debug.Log("Gun grabbed");
     }
 
     private void OnRelease(SelectExitEventArgs args)
     {
         isHeld = false;
         gunRb.isKinematic = false;
+        Debug.Log("Gun released");
     }
-    //fix with time
+    
+    // This new method will be called when the user activates the grabbed object
+    private void OnActivate(ActivateEventArgs args)
+    {
+        Debug.Log("Gun activated - firing!");
+        Fire();
+    }
+
+    public void Fire()
+    {
+        if (!isHeld) return;
+        
+        // Uncomment later when ammo matters
+        // if (currentClip <= 0)
+        // {
+        //     OnEmpty();
+        //     return;
+        // }
+        // currentClip--;
+        
+       Debug.Log("Gun firing");
+    
+        // Visual debug line to see where bullets should go
+        Debug.DrawRay(firePoint.position, firePoint.forward * 5f, Color.red, 2f);
+        
+        // Spawn bullet
+        Vector3 spawnPos = firePoint.position + firePoint.forward * 0.1f;
+        GameObject bullet = Instantiate(bulletPrefab, spawnPos, firePoint.rotation * bulletPrefab.transform.localRotation);
+        bullet.SetActive(true); // Make sure the bullet is active
+        
+        Debug.Log($"Bullet spawned at {spawnPos}, moving in direction {firePoint.forward}");
+        
+        Rigidbody rb = bullet.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+        rb.isKinematic = false;
+        rb.velocity = firePoint.forward * bulletSpeed;
+        rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+        Debug.Log($"Bullet fired with velocity: {rb.velocity.magnitude} in direction {rb.velocity.normalized}");
+        }
+        else
+        {
+            Debug.LogError("Bullet has no Rigidbody component!");
+        }
+
+        // Make sure collider is not a trigger
+        Collider col = bullet.GetComponent<Collider>();
+        if (col != null)
+        {
+            col.isTrigger = false;
+        }
+        
+        // Set bullet damage
+        Bullet bulletScript = bullet.GetComponent<Bullet>();
+        if (bulletScript != null)
+            bulletScript.damage = bulletDamage;
+        else
+            Debug.LogError("Bullet prefab is missing Bullet script component!");
+        
+        OnShoot();
+    }
+    
+    public virtual void OnShoot()
+    {
+        // Add audio here
+        Debug.Log("Bang!");
+    }
+    
+    public virtual void OnEmpty()
+    {
+        Debug.Log("Play empty audio here.");
+    }
+
+    private void CreateSimpleBulletPrefab()
+    {
+        // Create a sphere as a simple bullet
+        GameObject simpleBullet = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        simpleBullet.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f); // Small bullet
+        
+        // Add Rigidbody
+        Rigidbody rb = simpleBullet.AddComponent<Rigidbody>();
+        rb.useGravity = false;
+        rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
+        
+        // Add Bullet script
+        Bullet bulletScript = simpleBullet.AddComponent<Bullet>();
+        bulletScript.damage = bulletDamage;
+        bulletScript.lifeTime = 5f;
+        
+        // Set material to red for visibility
+        Renderer renderer = simpleBullet.GetComponent<Renderer>();
+        if (renderer != null)
+        {
+            renderer.material.color = Color.red;
+        }
+        
+        // Store this object and hide it
+        simpleBullet.SetActive(false);
+        bulletPrefab = simpleBullet;
+    }
+    private void CreateDefaultFirePoint()
+    {
+        // Create a fire point at the front of the gun
+        GameObject newFirePoint = new GameObject("FirePoint");
+        newFirePoint.transform.SetParent(transform, false);
+        newFirePoint.transform.localPosition = new Vector3(0, 0, 0.5f); // Adjust position as needed
+        firePoint = newFirePoint.transform;
+    }
+    
+    // fix with time
     // void OnCollisionEnter(Collision collision)
     // {
     //     if (!isHeld && currentClip <= 0)
@@ -115,19 +190,4 @@ public class BaseGun : MonoBehaviour
     //         }
     //     }
     // }
-
-    void Update()
-    {
-        
-        if (!isHeld) return;
-        Fire();
-        // if ((leftTriggerAction.action != null && leftTriggerAction.action.WasPressedThisFrame()) ||
-        //     (rightTriggerAction.action != null && rightTriggerAction.action.WasPressedThisFrame()))
-        // {
-        //     Fire();
-        // }
-
-    }
-    
-    
 }
