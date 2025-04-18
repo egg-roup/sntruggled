@@ -22,7 +22,9 @@ public class BaseGun : MonoBehaviour
     public UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable grabInteractable;
 
     private int currentClip;
-    public InputActionProperty triggerAction;
+    public InputActionProperty leftTriggerAction;
+    public InputActionProperty rightTriggerAction;
+
 
     private bool isHeld = false;
 
@@ -41,7 +43,6 @@ public class BaseGun : MonoBehaviour
 
     public void Fire()
     {
-        Debug.Log("BaseGun fire");
             
         //do the clip later      
         // if (currentClip <= 0)
@@ -55,19 +56,17 @@ public class BaseGun : MonoBehaviour
         // Spawn bullet
         Vector3 spawnPos = firePoint.position + firePoint.forward * 0.1f;
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation * bulletPrefab.transform.localRotation);
-        Debug.Log("Bullet spawned at: " + spawnPos);
 
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         if (rb != null)
             rb.velocity = firePoint.forward * bulletSpeed;
-            Debug.Log("Bullet velocity set to: " + rb.velocity);
 
         // Set bullet damage
         Bullet bulletScript = bullet.GetComponent<Bullet>();
         if (bulletScript != null)
             bulletScript.damage = bulletDamage;
 
-        OnShoot();
+        //OnShoot();
     }
     //do reload later
     // public void Reload()
@@ -79,10 +78,10 @@ public class BaseGun : MonoBehaviour
     // }
 
     // Placeholder to be filled in by teammate
-    public virtual void OnShoot()
-    {
-        //Debug.Log("Play shoot audio here.");
-    }
+    // public virtual void OnShoot()
+    // {
+    //     Debug.Log("Play shoot audio here.");
+    // }
 
     // Called when no bullets
     public virtual void OnEmpty()
@@ -119,9 +118,14 @@ public class BaseGun : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("BaseGun update running: isHeld = " + isHeld);
+        
         if (!isHeld) return;
-        Fire();
+        //Fire();
+        if ((leftTriggerAction.action != null && leftTriggerAction.action.WasPressedThisFrame()) ||
+            (rightTriggerAction.action != null && rightTriggerAction.action.WasPressedThisFrame()))
+        {
+            Fire();
+        }
 
     }
     

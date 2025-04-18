@@ -52987,11 +52987,15 @@ PrefabInstance:
     - target: {fileID: 6995877034676923738, guid: c9e561c07c63ff54ba33c6e62908a808, type: 3}
       propertyPath: triggerAction.m_Reference
       value: 
-      objectReference: {fileID: 1049991854554030967, guid: cff4d42766b04c045badbb365206bcc6, type: 3}
+      objectReference: {fileID: -6131295136447488360, guid: c348712bda248c246b8c49b3db54643f, type: 3}
     - target: {fileID: 6995877034676923738, guid: c9e561c07c63ff54ba33c6e62908a808, type: 3}
       propertyPath: triggerAction.m_UseReference
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6995877034676923738, guid: c9e561c07c63ff54ba33c6e62908a808, type: 3}
+      propertyPath: leftTriggerAction.m_Reference
+      value: 
+      objectReference: {fileID: -6131295136447488360, guid: c348712bda248c246b8c49b3db54643f, type: 3}
     - target: {fileID: 6995877034676923738, guid: c9e561c07c63ff54ba33c6e62908a808, type: 3}
       propertyPath: triggerAction.m_Action.m_Name
       value: Trigger
@@ -53001,8 +53005,28 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6995877034676923738, guid: c9e561c07c63ff54ba33c6e62908a808, type: 3}
+      propertyPath: rightTriggerAction.m_Reference
+      value: 
+      objectReference: {fileID: 187161793506945269, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+    - target: {fileID: 6995877034676923738, guid: c9e561c07c63ff54ba33c6e62908a808, type: 3}
       propertyPath: fireAction.m_ExpectedControlType
       value: Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 6995877034676923738, guid: c9e561c07c63ff54ba33c6e62908a808, type: 3}
+      propertyPath: leftTriggerAction.m_UseReference
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6995877034676923738, guid: c9e561c07c63ff54ba33c6e62908a808, type: 3}
+      propertyPath: leftTriggerAction.m_Action.m_Name
+      value: Left Trigger
+      objectReference: {fileID: 0}
+    - target: {fileID: 6995877034676923738, guid: c9e561c07c63ff54ba33c6e62908a808, type: 3}
+      propertyPath: rightTriggerAction.m_UseReference
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6995877034676923738, guid: c9e561c07c63ff54ba33c6e62908a808, type: 3}
+      propertyPath: rightTriggerAction.m_Action.m_Name
+      value: Right Trigger
       objectReference: {fileID: 0}
     - target: {fileID: 6995877034676923738, guid: c9e561c07c63ff54ba33c6e62908a808, type: 3}
       propertyPath: triggerAction.m_Action.m_Interactions
