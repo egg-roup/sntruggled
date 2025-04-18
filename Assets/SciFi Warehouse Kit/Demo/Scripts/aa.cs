@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PushPhysics : MonoBehaviour
+public class aa : MonoBehaviour
 {
     // this script pushes all rigidbodies that the character touches
     float pushPower = 2.0f;

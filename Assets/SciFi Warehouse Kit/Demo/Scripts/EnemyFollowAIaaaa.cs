@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyFollowAI : MonoBehaviour
+public class EnemyFollowAIaaaa : MonoBehaviour
 {
     public Transform player;  
     public float followSpeed = 3.5f; 

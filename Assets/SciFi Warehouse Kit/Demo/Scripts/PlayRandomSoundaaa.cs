@@ -1,7 +1,7 @@
 ﻿ using UnityEngine;
  using System.Collections;
  
- public class PlayRandomSound : MonoBehaviour {
+ public class PlayRandomSoundaaa : MonoBehaviour {
  
      public AudioSource randomSound;
      public AudioClip[] audioSources;
