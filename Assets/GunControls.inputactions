@@ -1,0 +1,45 @@
+{
+    "name": "GunControls",
+    "maps": [
+        {
+            "name": "Gun",
+            "id": "b5106c20-7882-479d-b237-e0d1a3f01886",
+            "actions": [
+                {
+                    "name": "Fire",
+                    "type": "Button",
+                    "id": "f435dbaa-6f4a-4e8d-a793-7825d65740ee",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "fde34058-632d-4fff-b35f-97e8d588293f",
+                    "path": "*/{Trigger}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d67f64c5-9158-47a2-9734-e1a77bdb5952",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
