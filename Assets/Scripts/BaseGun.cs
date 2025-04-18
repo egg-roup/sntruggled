@@ -120,12 +120,12 @@ public class BaseGun : MonoBehaviour
     {
         
         if (!isHeld) return;
-        //Fire();
-        if ((leftTriggerAction.action != null && leftTriggerAction.action.WasPressedThisFrame()) ||
-            (rightTriggerAction.action != null && rightTriggerAction.action.WasPressedThisFrame()))
-        {
-            Fire();
-        }
+        Fire();
+        // if ((leftTriggerAction.action != null && leftTriggerAction.action.WasPressedThisFrame()) ||
+        //     (rightTriggerAction.action != null && rightTriggerAction.action.WasPressedThisFrame()))
+        // {
+        //     Fire();
+        // }
 
     }
     
