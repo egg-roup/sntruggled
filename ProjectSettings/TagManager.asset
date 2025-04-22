@@ -40,6 +40,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Controllers
+    uniqueID: 2281105009
+    locked: 0
+  - name: Menu_Foreground
+    uniqueID: 1667997027
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

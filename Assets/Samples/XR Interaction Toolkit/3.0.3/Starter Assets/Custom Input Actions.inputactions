@@ -1,0 +1,45 @@
+{
+    "name": "Custom Input Actions",
+    "maps": [
+        {
+            "name": "Paused",
+            "id": "d5359f7b-2df9-4557-a7af-07f01619a7eb",
+            "actions": [
+                {
+                    "name": "MenuPressed",
+                    "type": "Button",
+                    "id": "d9cc8edd-0d9e-4e58-974b-ac739af9ea7d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "cb94b877-a1b0-4d0d-803c-5c3e27400f20",
+                    "path": "<OculusTouchController>/menu",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MenuPressed",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e3e66cc2-3ebd-4fc7-82c6-27c257ca610f",
+                    "path": "<XRController>/menu",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MenuPressed",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
