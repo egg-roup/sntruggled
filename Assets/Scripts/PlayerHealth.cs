@@ -5,7 +5,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class PlayerHealth : MonoBehaviour
 {
     public float maxHealth = 100f;
-    private float currentHealth;
+    public float currentHealth;
 
     public bool isDead { get; private set; } = false;
 
@@ -19,6 +19,7 @@ public class PlayerHealth : MonoBehaviour
         if (isDead) return;
 
         currentHealth -= amount;
+        Debug.Log($"Player took {amount} damage. Current health: {currentHealth}");
 
 
         if (currentHealth <= 0)
@@ -37,8 +38,8 @@ public class PlayerHealth : MonoBehaviour
     }
 
     void RestartGame()
-{
-    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-}
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 
 }

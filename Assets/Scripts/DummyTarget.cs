@@ -5,6 +5,7 @@ using UnityEngine;
 public class DummyTarget : MonoBehaviour
 {
     public float health = 100f;
+    public float healingAmount = 5f;
 
     public void TakeDamage(float amount)
     {
@@ -17,7 +18,24 @@ public class DummyTarget : MonoBehaviour
 
     private void Die()
     {
-        Debug.Log($"{gameObject.name} is destroyed!");
+        Debug.Log($"{gameObject.name} is destroyed! Healing player.");
+
         Destroy(gameObject);
+
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+
+        if (player != null)
+        {
+            PlayerHealth playerHealth = player.GetComponentInChildren<PlayerHealth>();
+            
+            if (playerHealth != null)
+            {
+                playerHealth.currentHealth = Mathf.Min(playerHealth.currentHealth + healingAmount, playerHealth.maxHealth);
+                Debug.Log($"Player healed by {healingAmount}. New health: {playerHealth.currentHealth}");
+            }
+
+        }
+
     }
+
 }

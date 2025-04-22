@@ -34,7 +34,7 @@ public class Bullet : MonoBehaviour
         Debug.DrawRay(transform.position, rb.velocity.normalized * 10f, Color.red, lifeTime);
         
         // Debug log
-        Debug.Log($"Bullet spawned at {transform.position} with velocity {rb.velocity}");
+        //Debug.Log($"Bullet spawned at {transform.position} with velocity {rb.velocity}");
     }
 
     void OnCollisionEnter(Collision collision)
@@ -50,7 +50,7 @@ public class Bullet : MonoBehaviour
             if (dummy != null)
             {
                 dummy.TakeDamage(damage);
-                Debug.Log($"Dealt {damage} damage to {collision.gameObject.name}");
+                //Debug.Log($"Dealt {damage} damage to {collision.gameObject.name}");
             }
         }
 
@@ -75,7 +75,7 @@ public class Bullet : MonoBehaviour
                     if (dummy != null)
                     {
                         dummy.TakeDamage(damage);
-                        Debug.Log($"Dealt {damage} damage to {hit.collider.gameObject.name} via raycast");
+                        //Debug.Log($"Dealt {damage} damage to {hit.collider.gameObject.name} via raycast");
                     }
                 }
                 

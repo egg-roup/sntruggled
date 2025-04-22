@@ -57,20 +57,20 @@ public class BaseGun : MonoBehaviour
     {
         isHeld = true;
         gunRb.isKinematic = true;
-        Debug.Log("Gun grabbed");
+        //Debug.Log("Gun grabbed");
     }
 
     private void OnRelease(SelectExitEventArgs args)
     {
         isHeld = false;
         gunRb.isKinematic = false;
-        Debug.Log("Gun released");
+        //Debug.Log("Gun released");
     }
     
     // This new method will be called when the user activates the grabbed object
     private void OnActivate(ActivateEventArgs args)
     {
-        Debug.Log("Gun activated - firing!");
+        //Debug.Log("Gun activated - firing!");
         Fire();
     }
 
@@ -86,7 +86,7 @@ public class BaseGun : MonoBehaviour
         // }
         // currentClip--;
         
-       Debug.Log("Gun firing");
+       //Debug.Log("Gun firing");
     
         // Visual debug line to see where bullets should go
         Debug.DrawRay(firePoint.position, firePoint.forward * 5f, Color.red, 2f);
@@ -96,7 +96,7 @@ public class BaseGun : MonoBehaviour
         GameObject bullet = Instantiate(bulletPrefab, spawnPos, firePoint.rotation * bulletPrefab.transform.localRotation);
         bullet.SetActive(true); // Make sure the bullet is active
         
-        Debug.Log($"Bullet spawned at {spawnPos}, moving in direction {firePoint.forward}");
+        //Debug.Log($"Bullet spawned at {spawnPos}, moving in direction {firePoint.forward}");
         
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         if (rb != null)
@@ -131,12 +131,12 @@ public class BaseGun : MonoBehaviour
     public virtual void OnShoot()
     {
         // Add audio here
-        Debug.Log("Bang!");
+        //Debug.Log("Bang!");
     }
     
     public virtual void OnEmpty()
     {
-        Debug.Log("Play empty audio here.");
+        //Debug.Log("Play empty audio here.");
     }
 
     private void CreateSimpleBulletPrefab()
