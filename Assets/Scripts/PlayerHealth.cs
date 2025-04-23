@@ -7,6 +7,7 @@ public class PlayerHealth : MonoBehaviour
     public float maxHealth = 100f;
     public float currentHealth;
     private GameOverMenu gameOverMenu;
+    public HealthBar healthBar;
 
     public bool isDead { get; private set; } = false;
 
@@ -14,6 +15,7 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth = maxHealth;
         gameOverMenu = FindObjectOfType<GameOverMenu>();
+        healthBar.SetMaxHealth(maxHealth);
     }
 
     public void TakeDamage(float amount)
@@ -22,7 +24,7 @@ public class PlayerHealth : MonoBehaviour
 
         currentHealth -= amount;
         Debug.Log($"Player took {amount} damage. Current health: {currentHealth}");
-
+        healthBar.SetHealth(currentHealth);
 
         if (currentHealth <= 0)
         {

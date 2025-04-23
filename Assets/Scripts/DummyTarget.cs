@@ -20,6 +20,10 @@ public class DummyTarget : MonoBehaviour
     {
         Debug.Log($"{gameObject.name} is destroyed! Healing player.");
 
+        if (ScoreManager.scoreManager != null) {
+            ScoreManager.scoreManager.AddKill();
+        }
+        
         Destroy(gameObject);
 
         GameObject player = GameObject.FindGameObjectWithTag("Player");
