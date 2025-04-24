@@ -64,6 +64,18 @@ public class BaseGun : MonoBehaviour
         }
 
         // ui update
+        if (bulletUI == null)
+        {
+            GameObject uiObject = GameObject.Find("BulletUI");
+            if (uiObject != null)
+            {
+                bulletUI = uiObject.GetComponent<BulletUIController>();
+            }
+            else
+            {
+                Debug.LogWarning("BulletUI object not found in hierarchy.");
+            }
+        }
         if (bulletUI != null) {
             bulletUI.UpdateAmmo(currentClip, totalAmmo);
         }
@@ -99,6 +111,8 @@ public class BaseGun : MonoBehaviour
         isHeld = false;
         gunRb.isKinematic = false;
         //Debug.Log("Gun released");
+        Vector3 throwDirection = transform.forward; // you can tweak this
+        gunRb.AddForce(throwDirection * 5f, ForceMode.VelocityChange);    
     }
     
     // This new method will be called when the user activates the grabbed object
@@ -221,20 +235,26 @@ public class BaseGun : MonoBehaviour
         newFirePoint.transform.localPosition = new Vector3(0, 0, 0.5f); // Adjust position as needed
         firePoint = newFirePoint.transform;
     }
+
+
+
+   
     
     // fix with time
-    // void OnCollisionEnter(Collision collision)
-    // {
-    //     if (!isHeld && currentClip <= 0)
-    //     {
-    //         if (collision.gameObject.CompareTag("Enemy"))
-    //         {
-    //             // Deal thrown weapon damage
-    //             float damage = bulletDamage * 4f;
-    //             DummyTarget dummy = collision.gameObject.GetComponent<DummyTarget>();
-    //             if (dummy != null)
-    //                 dummy.TakeDamage(damage);
-    //         }
-    //     }
-    // }
+    void OnCollisionEnter(Collision collision)
+    {
+        if (!isHeld && currentClip == 0)
+        {
+            if (collision.gameObject.CompareTag("Enemy"))
+            {
+                // Deal thrown weapon damage
+                float damage = bulletDamage * 4f;
+                DummyTarget dummy = collision.gameObject.GetComponent<DummyTarget>();
+                if (dummy != null)
+                    dummy.TakeDamage(damage);
+
+                Destroy(gameObject);
+            }
+        }
+    }
 }

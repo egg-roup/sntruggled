@@ -876,11 +876,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletUI: {fileID: 0}
-  clipSize: 50
-  totalAmmo: 50
-  bulletDamage: 10
+  clipSize: 25
+  totalAmmo: 25
+  bulletDamage: 20
+  shootClip: {fileID: 8300000, guid: 08f78eba48bb21c44ac5a74ca84efc83, type: 3}
+  emptyClip: {fileID: 8300000, guid: 98dff37ec36df6d4a9109a4bb7d027ff, type: 3}
   bulletPrefab: {fileID: 4576570851416454948, guid: fd51294c8e770ca4cb01fd48bc0f0c02, type: 3}
   firePoint: {fileID: 1652611855263440885}
-  bulletSpeed: 10
+  bulletSpeed: 20
   gunRb: {fileID: 412144289957701244}
   grabInteractable: {fileID: 3933472179040553290}

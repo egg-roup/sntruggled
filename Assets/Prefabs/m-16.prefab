@@ -576,10 +576,12 @@ MonoBehaviour:
   bulletUI: {fileID: 0}
   clipSize: 50
   totalAmmo: 50
-  bulletDamage: 10
+  bulletDamage: 20
+  shootClip: {fileID: 8300000, guid: 08f78eba48bb21c44ac5a74ca84efc83, type: 3}
+  emptyClip: {fileID: 8300000, guid: 98dff37ec36df6d4a9109a4bb7d027ff, type: 3}
   bulletPrefab: {fileID: 8426850363789487077, guid: 9085e1f715267824d8a6df5dcaa1b33e, type: 3}
   firePoint: {fileID: 7810012253336144256}
-  bulletSpeed: 10
+  bulletSpeed: 20
   gunRb: {fileID: 1241195421040699378}
   grabInteractable: {fileID: 6330932601630022302}
 --- !u!1 &3705335661862419109
