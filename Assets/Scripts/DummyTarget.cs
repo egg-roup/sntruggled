@@ -12,6 +12,8 @@ public class DummyTarget : MonoBehaviour
     public float health = 100f;
     public float healingAmount = 5f;
 
+    private bool isDead = false;
+
 
     void Start()
     {
@@ -21,6 +23,9 @@ public class DummyTarget : MonoBehaviour
 
     public void TakeDamage(float amount)
     {
+
+        if (isDead) return;
+
         health -= amount;
         Debug.Log($"{gameObject.name} took {amount} damage. Remaining: {health}");
 
@@ -32,6 +37,9 @@ public class DummyTarget : MonoBehaviour
 
     private void Die()
     {
+        if (isDead) return;
+        isDead = true;
+
         Debug.Log($"{gameObject.name} is destroyed! Healing player.");
 
 
