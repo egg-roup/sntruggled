@@ -46,9 +46,23 @@ public class EnemyFollowAI : MonoBehaviour
 
     void Update()
     {
-        if (player == null) return;
+         if (player == null) return;
 
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+
+        if (!GameState.instance.isSceneTransitioning && 
+            distanceToPlayer <= attackRange && 
+            Time.time - lastAttackTime >= attackCooldown && 
+            !isAttacking)
+        {
+            StartCoroutine(PerformAttackWithDelay());
+        }
+
+        if (GameState.instance.isSceneTransitioning)
+        {
+            isAttacking = false; // just in case the enemy is mid-attack
+            return;
+        }
 
         // Follow player
         if (distanceToPlayer > attackRange)
@@ -86,11 +100,19 @@ public class EnemyFollowAI : MonoBehaviour
 
     IEnumerator PerformAttackWithDelay()
     {
+
         isAttacking = true;
 
         yield return new WaitForSeconds(0.3f); 
 
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+
+        if (GameState.instance != null && GameState.instance.isSceneTransitioning)
+        {
+            isAttacking = false;
+            yield break;
+        }
+
 
         if (playerHealth != null && distanceToPlayer <= attackRange)
         {

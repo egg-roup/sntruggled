@@ -9,7 +9,6 @@ public class GameOverMenu : MonoBehaviour
 {
     public GameObject gameOverMenu;
     public GameObject playerStatsUI;
-
     public bool isGameOver = false;
 
     public Button restartButton;
@@ -42,7 +41,9 @@ public class GameOverMenu : MonoBehaviour
     }
 
     public void GoMenu() {
+        gameOverMenu.SetActive(false);
         Time.timeScale = 1;
+        GameState.instance.isSceneTransitioning = true;
         SceneTransitionManager.singleton.GoToSceneAsync(0);
         Debug.Log("LOADING SCENE!");
     }

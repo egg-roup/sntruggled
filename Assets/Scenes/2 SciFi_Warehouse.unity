@@ -21000,6 +21000,7 @@ GameObject:
   - component: {fileID: 863721146}
   - component: {fileID: 863721145}
   - component: {fileID: 863721148}
+  - component: {fileID: 863721149}
   m_Layer: 5
   m_Name: Scene Manager
   m_TagString: Untagged
@@ -21173,6 +21174,20 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RaycastTriggerInteraction: 1
+--- !u!114 &863721149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 863721140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0274f6ac7205fb4ba85682e0488ebe6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGameOver: 0
+  isSceneTransitioning: 0
 --- !u!4 &865885294 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5548154041112411600, guid: 63d248e67db58c04aa37512e19848568, type: 3}
@@ -58422,6 +58437,14 @@ PrefabInstance:
       propertyPath: bulletUI
       value: 
       objectReference: {fileID: 1825170195}
+    - target: {fileID: 6730519408569851102, guid: f9dcfc5bd2c1b454ea12d55ab72568f3, type: 3}
+      propertyPath: emptyClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 98dff37ec36df6d4a9109a4bb7d027ff, type: 3}
+    - target: {fileID: 6730519408569851102, guid: f9dcfc5bd2c1b454ea12d55ab72568f3, type: 3}
+      propertyPath: shootClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 92d35fe1c59bbd14eaee9e3d3b54cea7, type: 3}
     - target: {fileID: 8939751070268031785, guid: f9dcfc5bd2c1b454ea12d55ab72568f3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 31.423077

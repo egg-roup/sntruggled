@@ -63,6 +63,7 @@ public class PauseMenu : MonoBehaviour
     public void GoMainMenu() {
         pauseMenu.SetActive(false);
         Time.timeScale = 1;
+        GameState.instance.isSceneTransitioning = true;
         SceneTransitionManager.singleton.GoToSceneAsync(0);
         Debug.Log("LOADING SCENE!");
     }
