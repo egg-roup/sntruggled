@@ -11,11 +11,13 @@ public class PauseMenu : MonoBehaviour
     public GameObject playerStatsUI;
     private bool isPaused = false;
 
+    public GameObject gameOverMenu;
+
     public Button resumeButton;
     public Button menuButton;
     public InputActionReference pauseAction;
 
-    public GameObject menuContainer;
+    // public GameObject menuContainer;
 
 
     // Start is called before the first frame update
@@ -28,7 +30,6 @@ public class PauseMenu : MonoBehaviour
 
         pauseAction.action.performed += PauseButtonPressed;
         pauseAction.action.Enable();
-
     }
 
     void OnDestroy()
@@ -37,7 +38,13 @@ public class PauseMenu : MonoBehaviour
         pauseAction.action.Disable();
     }
 
+
+
     public void PauseButtonPressed(InputAction.CallbackContext context) {
+        if (gameOverMenu.gameObject.activeSelf) {
+            return;
+        }
+
         if (isPaused) {
             ResumeGame();
         }

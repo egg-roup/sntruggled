@@ -10,12 +10,12 @@ public class GameOverMenu : MonoBehaviour
     public GameObject gameOverMenu;
     public GameObject playerStatsUI;
 
-    private bool isDead = false;
+    public bool isGameOver = false;
 
     public Button restartButton;
     public Button mainButton;
 
-    public GameObject menuContainer;
+    // public GameObject menuContainer;
 
     // Start is called before the first frame update
     void Start()
@@ -28,7 +28,7 @@ public class GameOverMenu : MonoBehaviour
     }
 
     public void ShowGameOver() {
-        isDead = true;
+        isGameOver = true;
         Time.timeScale = 0;
         gameOverMenu.SetActive(true);
         playerStatsUI.SetActive(false);
@@ -42,7 +42,7 @@ public class GameOverMenu : MonoBehaviour
     }
 
     public void GoMenu() {
-        Time.timeScale = 1;
+        Time.timeScale = 0;
         SceneTransitionManager.singleton.GoToSceneAsync(0);
     }
 
