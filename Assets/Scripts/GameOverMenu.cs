@@ -42,8 +42,9 @@ public class GameOverMenu : MonoBehaviour
     }
 
     public void GoMenu() {
-        Time.timeScale = 0;
+        Time.timeScale = 1;
         SceneTransitionManager.singleton.GoToSceneAsync(0);
+        Debug.Log("LOADING SCENE!");
     }
 
     // private void PositionMenu() {
