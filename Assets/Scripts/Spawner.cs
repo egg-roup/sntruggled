@@ -11,6 +11,10 @@ public class Spawner : MonoBehaviour
     public GameObject enemy;
 
     public float waveInterval = 30f; // Time between waves
+    private float countdownTimer;
+
+    public int CurrentWave => waveNumber;
+    public float TimeUntilNextWave => countdownTimer;
 
     private void Start()
     {
@@ -21,7 +25,14 @@ public class Spawner : MonoBehaviour
             spawners[i] = transform.GetChild(i).gameObject;
         }
 
+        countdownTimer = 10f;
         StartCoroutine(WaveSpawner());
+    }
+
+    private void Update() {
+        if (countdownTimer > 0) {
+            countdownTimer -= Time.deltaTime;
+        }
     }
 
     private IEnumerator WaveSpawner()
@@ -35,7 +46,8 @@ public class Spawner : MonoBehaviour
 
             // Gradually increase the interval, up to a max value
             waveInterval = Mathf.Min(waveInterval + 5f, 120f); // add 5 seconds per wave, cap at 60
-
+            countdownTimer = waveInterval; 
+            
             yield return new WaitForSeconds(waveInterval);
         }
     }
