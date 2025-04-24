@@ -35,6 +35,7 @@ public class DummyTarget : MonoBehaviour
             if (playerHealth != null)
             {
                 playerHealth.currentHealth = Mathf.Min(playerHealth.currentHealth + healingAmount, playerHealth.maxHealth);
+                playerHealth.healthBar.SetHealth(playerHealth.currentHealth);
                 Debug.Log($"Player healed by {healingAmount}. New health: {playerHealth.currentHealth}");
             }
 

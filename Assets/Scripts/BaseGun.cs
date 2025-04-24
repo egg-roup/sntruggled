@@ -5,8 +5,11 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class BaseGun : MonoBehaviour
 {
+
+    public BulletUIController bulletUI;
+
     [Header("Ammo Settings")]
-    public int clipSize = 10;
+    public int clipSize = 20;
     public int totalAmmo = 50;
     public float bulletDamage = 10f;
 
@@ -51,6 +54,11 @@ public class BaseGun : MonoBehaviour
         {
             Debug.LogError("XRGrabInteractable not assigned to gun!");
         }
+
+        // ui update
+        if (bulletUI != null) {
+            bulletUI.UpdateAmmo(currentClip, totalAmmo);
+        }
     }
 
     private void OnGrab(SelectEnterEventArgs args)
@@ -79,14 +87,19 @@ public class BaseGun : MonoBehaviour
         if (!isHeld) return;
         
         // Uncomment later when ammo matters
-        // if (currentClip <= 0)
-        // {
-        //     OnEmpty();
-        //     return;
-        // }
-        // currentClip--;
+        if (currentClip <= 0)
+        {
+            OnEmpty();
+            return;
+        }
+        currentClip--;
         
-       //Debug.Log("Gun firing");
+       Debug.Log("Gun firing");
+
+       // ui update
+       if (bulletUI != null) {
+        bulletUI.UpdateAmmo(currentClip, totalAmmo);
+       }
     
         // Visual debug line to see where bullets should go
         Debug.DrawRay(firePoint.position, firePoint.forward * 5f, Color.red, 2f);
