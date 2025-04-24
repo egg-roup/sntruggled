@@ -8,6 +8,7 @@ using UnityEngine.InputSystem;
 public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseMenu;
+    public GameObject playerStatsUI;
     private bool isPaused = false;
 
     public Button resumeButton;
@@ -47,6 +48,7 @@ public class PauseMenu : MonoBehaviour
 
     public void ResumeGame() {
         pauseMenu.SetActive(false);
+        playerStatsUI.SetActive(true);
         Time.timeScale = 1;
         isPaused = false;
     }
@@ -61,18 +63,19 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.SetActive(true);
         Time.timeScale = 0;
         isPaused = true;
+        playerStatsUI.SetActive(false);
 
-        PositionMenu();
+        // PositionMenu();
     }
 
-    private void PositionMenu() {
-        Vector3 vHeadPos = Camera.main.transform.position;
-        Vector3 vGazeDir = Camera.main.transform.forward;
-        menuContainer.transform.position = (vHeadPos + vGazeDir * 3.0f) + new Vector3(0.0f, -.40f, 0.0f);
+    // private void PositionMenu() {
+    //     Vector3 vHeadPos = Camera.main.transform.position;
+    //     Vector3 vGazeDir = Camera.main.transform.forward;
+    //     menuContainer.transform.position = (vHeadPos + vGazeDir * 3.0f) + new Vector3(0.0f, -.40f, 0.0f);
 
-        // Make the menu face the camera
-        Vector3 vRot = Camera.main.transform.eulerAngles;
-        vRot.z = 0;  // Optional: This ensures no tilting on the Z-axis, only yaw and pitch.
-        menuContainer.transform.eulerAngles = vRot;
-    }
+    //     // Make the menu face the camera
+    //     Vector3 vRot = Camera.main.transform.eulerAngles;
+    //     vRot.z = 0;  // Optional: This ensures no tilting on the Z-axis, only yaw and pitch.
+    //     menuContainer.transform.eulerAngles = vRot;
+    // }
 }
