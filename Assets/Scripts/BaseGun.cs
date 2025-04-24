@@ -13,6 +13,14 @@ public class BaseGun : MonoBehaviour
     public int totalAmmo = 50;
     public float bulletDamage = 10f;
 
+    [Header("Audio Clips")]
+
+    public AudioClip shootClip;
+    public AudioClip emptyClip;
+
+    private AudioSource gunShoot;
+    private AudioSource gunEmpty;
+
     [Header("Bullet Settings")]
     public GameObject bulletPrefab;
     public Transform firePoint;
@@ -58,6 +66,24 @@ public class BaseGun : MonoBehaviour
         // ui update
         if (bulletUI != null) {
             bulletUI.UpdateAmmo(currentClip, totalAmmo);
+        }
+
+        // audio stuff
+        gunShoot = gameObject.AddComponent<AudioSource>();
+        gunEmpty = gameObject.AddComponent<AudioSource>();
+
+        if (shootClip != null)
+        {
+            gunShoot.clip = shootClip;
+            gunShoot.playOnAwake = false;
+            gunShoot.spatialBlend = 1f; 
+        }
+
+        if (emptyClip != null)
+        {
+            gunEmpty.clip = emptyClip;
+            gunEmpty.playOnAwake = false;
+            gunEmpty.spatialBlend = 1f;
         }
     }
 
@@ -143,13 +169,21 @@ public class BaseGun : MonoBehaviour
     
     public virtual void OnShoot()
     {
-        // Add audio here
-        //Debug.Log("Bang!");
+        if (gunShoot != null && shootClip != null)
+        {
+            gunShoot.pitch = Random.Range(0.95f, 1.05f);
+            gunShoot.PlayOneShot(shootClip);
+            Debug.Log("Bang!");
+        }
     }
     
     public virtual void OnEmpty()
     {
-        //Debug.Log("Play empty audio here.");
+        if (gunEmpty != null && emptyClip != null)
+        {
+            gunEmpty.PlayOneShot(emptyClip);
+            Debug.Log("you have no more ammo.");
+        }
     }
 
     private void CreateSimpleBulletPrefab()
