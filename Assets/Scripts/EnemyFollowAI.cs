@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
+
 [RequireComponent(typeof(AudioSource))]
 public class EnemyFollowAI : MonoBehaviour
 {
@@ -11,63 +12,68 @@ public class EnemyFollowAI : MonoBehaviour
     public bool useSmoothRotation = true;
     public float rotationSpeed = 1f;
 
+
     public float attackRange = 2.5f;
     public float attackDamage = 10f;
     public float attackCooldown = 1f;
     private float lastAttackTime;
 
+
     public AudioClip footStepSound;
     public float footStepDelay = 0.5f;
+
 
     private NavMeshAgent agent;
     private AudioSource audioSource;
     private float nextFootstep = 0;
 
+
     private bool isAttacking = false;
 
 
+    private Animator animator;
+
+
+
+
     private PlayerHealth playerHealth;
+
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         audioSource = GetComponent<AudioSource>();
+        animator = GetComponentInChildren<Animator>();
+
 
         if (agent == null)
             agent = gameObject.AddComponent<NavMeshAgent>();
 
+
         agent.speed = followSpeed;
         agent.stoppingDistance = stoppingDistance;
+
 
         if (player != null)
             playerHealth = player.GetComponentInChildren<PlayerHealth>();
 
+
     }
+
 
     void Update()
     {
-         if (player == null) return;
+        if (player == null) return;
+
 
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-        if (!GameState.instance.isSceneTransitioning && 
-            distanceToPlayer <= attackRange && 
-            Time.time - lastAttackTime >= attackCooldown && 
-            !isAttacking)
-        {
-            StartCoroutine(PerformAttackWithDelay());
-        }
-
-        if (GameState.instance.isSceneTransitioning)
-        {
-            isAttacking = false; // just in case the enemy is mid-attack
-            return;
-        }
 
         // Follow player
         if (distanceToPlayer > attackRange)
         {
             agent.SetDestination(player.position);
+
 
             if (useSmoothRotation)
             {
@@ -76,6 +82,7 @@ public class EnemyFollowAI : MonoBehaviour
                 transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
             }
         }
+
 
         // Footstep Sound
         if (agent.velocity.magnitude > 0.1f && distanceToPlayer > attackRange)
@@ -92,26 +99,32 @@ public class EnemyFollowAI : MonoBehaviour
             nextFootstep = 0;
         }
 
+
         if (distanceToPlayer <= attackRange && Time.time - lastAttackTime >= attackCooldown && !isAttacking)
         {
             StartCoroutine(PerformAttackWithDelay());
         }
     }
 
+
     IEnumerator PerformAttackWithDelay()
     {
-
         isAttacking = true;
 
-        yield return new WaitForSeconds(0.3f); 
+
+        if (animator != null)
+        {
+            animator.SetTrigger("Attack");
+            Debug.Log("Attack trigger set");
+        }
+
+
+        yield return new WaitForSeconds(0.5f);
+
 
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-        if (GameState.instance != null && GameState.instance.isSceneTransitioning)
-        {
-            isAttacking = false;
-            yield break;
-        }
+
 
 
         if (playerHealth != null && distanceToPlayer <= attackRange)
@@ -121,7 +134,9 @@ public class EnemyFollowAI : MonoBehaviour
             Debug.Log("Enemy attacked the player!");
         }
 
+
         isAttacking = false;
     }
+
 
 }
