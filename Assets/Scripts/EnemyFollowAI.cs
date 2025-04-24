@@ -57,7 +57,21 @@ public class EnemyFollowAI : MonoBehaviour
         if (player != null)
             playerHealth = player.GetComponentInChildren<PlayerHealth>();
 
+        if (player == null)
+        {
+            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+            if (playerObj != null)
+            {
+                player = playerObj.transform;
 
+                // Optional: Get PlayerHealth from the player object or its children
+                playerHealth = playerObj.GetComponentInChildren<PlayerHealth>();
+            }
+            else
+            {
+                Debug.LogWarning("Player with tag 'Player' not found in the scene.");
+            }
+        }
     }
 
 
