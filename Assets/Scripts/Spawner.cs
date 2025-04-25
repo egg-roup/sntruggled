@@ -45,7 +45,7 @@ public class Spawner : MonoBehaviour
             StartWave();
 
             // Gradually increase the interval, up to a max value
-            waveInterval = Mathf.Min(waveInterval + 5f, 120f); // add 5 seconds per wave, cap at 60
+            waveInterval = Mathf.Min(waveInterval + 3f, 120f); // add 5 seconds per wave, cap at 60
             countdownTimer = waveInterval; 
             
             yield return new WaitForSeconds(waveInterval);

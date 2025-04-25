@@ -574,8 +574,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletUI: {fileID: 0}
-  clipSize: 50
-  totalAmmo: 50
+  clipSize: 80
+  totalAmmo: 80
   bulletDamage: 20
   shootClip: {fileID: 8300000, guid: 08f78eba48bb21c44ac5a74ca84efc83, type: 3}
   emptyClip: {fileID: 8300000, guid: 98dff37ec36df6d4a9109a4bb7d027ff, type: 3}
