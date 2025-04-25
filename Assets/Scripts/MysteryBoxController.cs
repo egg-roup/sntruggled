@@ -28,7 +28,6 @@ public class MysteryBoxController : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip boxOpenClip1;
     public AudioClip boxOpenClip2;
-
     public AudioClip gunDropClip;
 
     private GameObject currentShowcaseGun;
@@ -61,18 +60,27 @@ public class MysteryBoxController : MonoBehaviour
 
     private IEnumerator OpenAndRoll()
     {
-        // Trigger chest animation
-        animator.SetTrigger(openTrigger);
+        // Skip first 4 seconds and play animation at 2x speed
+        if (boxAnimationClip != null)
+        {
+            float normalizedTime = 4f / boxAnimationClip.length;
+            animator.speed = 2f;
+            animator.Play("OpenChest", -1, normalizedTime);
+        }
+        else
+        {
+            Debug.LogWarning("boxAnimationClip not assigned!");
+        }
 
-        // Play chest opening sound
+        // Play staggered box open sounds
         if (audioSource && boxOpenClip1 && boxOpenClip2)
         {
             audioSource.PlayOneShot(boxOpenClip1);
-            yield return new WaitForSeconds(boxOpenClip1.length);
-            audioSource.PlayOneShot(boxOpenClip2);
+            StartCoroutine(PlayClipWithDelay(boxOpenClip2, boxOpenClip1.length * 0.8f));
         }
 
-        yield return new WaitForSeconds(0.5f); // sync with animation start
+        // Wait a short bit to sync start of gun cycling with visible animation (post-skip)
+        yield return new WaitForSeconds(0.25f);
 
         GameObject selectedGun = null;
 
@@ -124,6 +132,9 @@ public class MysteryBoxController : MonoBehaviour
         {
             audioSource.PlayOneShot(gunDropClip);
         }
+
+        // Reset animation speed for next use
+        animator.speed = 1f;
     }
 
     private GameObject GetRandomWeightedGun()
@@ -142,5 +153,14 @@ public class MysteryBoxController : MonoBehaviour
         }
 
         return gunPrefabs[0].gunPrefab;
+    }
+
+    private IEnumerator PlayClipWithDelay(AudioClip clip, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        if (audioSource && clip)
+        {
+            audioSource.PlayOneShot(clip);
+        }
     }
 }

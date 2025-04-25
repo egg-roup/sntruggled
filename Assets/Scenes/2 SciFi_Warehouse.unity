@@ -56973,6 +56973,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: mystery box
       objectReference: {fileID: 0}
+    - target: {fileID: 509729899755294665, guid: 8ba4e6c959a8faa4ea4917e1589da3b5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 918092901763751467, guid: 8ba4e6c959a8faa4ea4917e1589da3b5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 12.122
