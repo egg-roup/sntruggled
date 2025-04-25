@@ -56149,6 +56149,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3694022070958690438, guid: cd6658787be79b044aefc86f7d42e493, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4033045333298958217, guid: cd6658787be79b044aefc86f7d42e493, type: 3}
       propertyPath: coins
       value: 10
@@ -56202,7 +56206,8 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 3694022070958690438, guid: cd6658787be79b044aefc86f7d42e493, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd6658787be79b044aefc86f7d42e493, type: 3}
