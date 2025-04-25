@@ -434,7 +434,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e0b85d49ba6d604e8a66acaf8bb26de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  health: 50
   healingAmount: 5
 --- !u!136 &6379047470025855671
 CapsuleCollider:
