@@ -9,7 +9,7 @@ public class MysteryBoxController : MonoBehaviour
     public Transform showcasePoint;
     public List<GunPrefabData> gunPrefabs;
     public int showcaseCycles = 8;
-    public float cycleDelay = 0.5f;
+    public float cycleDelay = 0.75f;
     public float finalDisplayDuration = 1.5f;
 
     [Header("Cost Settings")]
@@ -26,6 +26,9 @@ public class MysteryBoxController : MonoBehaviour
 
     [Header("Audio")]
     public AudioSource audioSource;
+    public AudioClip boxOpenClip1;
+    public AudioClip boxOpenClip2;
+
     public AudioClip gunDropClip;
 
     private GameObject currentShowcaseGun;
@@ -58,19 +61,22 @@ public class MysteryBoxController : MonoBehaviour
 
     private IEnumerator OpenAndRoll()
     {
-        // Start animation at 4 seconds in, speed it up 2x
-        if (boxAnimationClip != null)
+        // Trigger chest animation
+        animator.SetTrigger(openTrigger);
+
+        // Play chest opening sound
+        if (audioSource && boxOpenClip1 && boxOpenClip2)
         {
-            float normalizedTime = 4f / boxAnimationClip.length;
-            animator.speed = 2f;
-            animator.Play("OpenChest", -1, normalizedTime);
+            audioSource.PlayOneShot(boxOpenClip1);
+            yield return new WaitForSeconds(boxOpenClip1.length);
+            audioSource.PlayOneShot(boxOpenClip2);
         }
 
-        yield return new WaitForSeconds(0.5f); // sync delay
+        yield return new WaitForSeconds(0.5f); // sync with animation start
 
         GameObject selectedGun = null;
 
-        // 8 preview cycles
+        // 8 quick showcase cycles
         for (int i = 0; i < showcaseCycles; i++)
         {
             selectedGun = GetRandomWeightedGun();
@@ -78,8 +84,7 @@ public class MysteryBoxController : MonoBehaviour
             if (currentShowcaseGun)
                 Destroy(currentShowcaseGun);
 
-            Quaternion gunRotation = Quaternion.Euler(0f, 90f, 0f);
-            currentShowcaseGun = Instantiate(selectedGun, showcasePoint.position, gunRotation);
+            currentShowcaseGun = Instantiate(selectedGun, showcasePoint.position, Quaternion.identity);
             currentShowcaseGun.transform.SetParent(showcasePoint);
 
             Rigidbody rb = currentShowcaseGun.GetComponent<Rigidbody>();
@@ -92,14 +97,13 @@ public class MysteryBoxController : MonoBehaviour
             yield return new WaitForSeconds(cycleDelay);
         }
 
-        // Final gun display
+        // Final preview
         selectedGun = GetRandomWeightedGun();
 
         if (currentShowcaseGun)
             Destroy(currentShowcaseGun);
 
-        Quaternion finalRotation = Quaternion.Euler(0f, 90f, 0f);
-        currentShowcaseGun = Instantiate(selectedGun, showcasePoint.position, finalRotation);
+        currentShowcaseGun = Instantiate(selectedGun, showcasePoint.position, Quaternion.identity);
         currentShowcaseGun.transform.SetParent(showcasePoint);
 
         Rigidbody finalRb = currentShowcaseGun.GetComponent<Rigidbody>();
@@ -113,15 +117,13 @@ public class MysteryBoxController : MonoBehaviour
 
         Destroy(currentShowcaseGun);
 
-        GameObject spawnedGun = Instantiate(selectedGun, spawnPoint.position, finalRotation);
-        // Let this one fall — don't make it kinematic
+        GameObject spawnedGun = Instantiate(selectedGun, spawnPoint.position, Quaternion.identity);
 
+        // Play drop sound
         if (audioSource && gunDropClip)
         {
             audioSource.PlayOneShot(gunDropClip);
         }
-
-        animator.speed = 1f; // reset animation speed
     }
 
     private GameObject GetRandomWeightedGun()
@@ -139,6 +141,6 @@ public class MysteryBoxController : MonoBehaviour
                 return data.gunPrefab;
         }
 
-        return gunPrefabs[0].gunPrefab; // fallback
+        return gunPrefabs[0].gunPrefab;
     }
 }
