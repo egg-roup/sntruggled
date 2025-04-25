@@ -4279,7 +4279,7 @@ MonoBehaviour:
 
     Grab the gun and shoot the zombie cats. They may be
     cute but they are not friendly. Each kill earns you 10 points and 1 coin. Look
-    out for mystery chests to unlock more guns to help you! Your goal is to beat
+    out for the mystery chest to unlock more guns to help you! Your goal is to beat
     your high score and challenge yourself to play again for a better score!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5b036e831c0c90547b32a8a896d80f79, type: 2}
