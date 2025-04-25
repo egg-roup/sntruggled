@@ -17,8 +17,11 @@ public class ScoreManager : MonoBehaviour
     public TextMeshProUGUI coinsText;
     public TextMeshProUGUI highScoreText;
 
-    void Start() {
+    void Awake() {
         scoreManager = this;
+    }
+
+    void Start() {
         Debug.Log("ScoreManager initialized");
         
         LoadHighScore();
