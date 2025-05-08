@@ -64,3 +64,11 @@ fight off endless waves of toys using various toy gun weapons. Set in a world wh
 - **Version Control Systems:** Git or Perforce for source code and asset management.
 
 By following this structured plan, the development team aims to deliver a high-quality VR Zombie Survival Game within a 1.5-month development timeframe.
+
+## Setup Instructions 
+
+## Member Contributions 
+- William Licup: Worked on gun and chest functionality
+- Nathan Lam: Set up environment including map, enemies, wave spawners
+- Angela Santos: Worked on main menu, UI, HUD display, score manager
+- Emily Tran: Worked on enemy AI and animation, and healing system
