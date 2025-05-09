@@ -13,10 +13,13 @@ public class BaseGun : MonoBehaviour
     public int totalAmmo = 50;
     public float bulletDamage = 10f;
 
-    [Header("Audio Clips")]
-
+    [Header("Audio Settings")]
     public AudioClip shootClip;
     public AudioClip emptyClip;
+    [Range(0f, 1f)]
+    public float shootVolume = 1f;
+    [Range(0f, 1f)]
+    public float emptyVolume = 1f;
 
     private AudioSource gunShoot;
     private AudioSource gunEmpty;
@@ -80,7 +83,13 @@ public class BaseGun : MonoBehaviour
             bulletUI.UpdateAmmo(currentClip, totalAmmo);
         }
 
-        // audio stuff
+        // Setup audio sources
+        InitializeAudioSources();
+    }
+
+    private void InitializeAudioSources()
+    {
+        // Initialize audio sources
         gunShoot = gameObject.AddComponent<AudioSource>();
         gunEmpty = gameObject.AddComponent<AudioSource>();
 
@@ -89,6 +98,7 @@ public class BaseGun : MonoBehaviour
             gunShoot.clip = shootClip;
             gunShoot.playOnAwake = false;
             gunShoot.spatialBlend = 1f; 
+            gunShoot.volume = shootVolume;
         }
 
         if (emptyClip != null)
@@ -96,6 +106,26 @@ public class BaseGun : MonoBehaviour
             gunEmpty.clip = emptyClip;
             gunEmpty.playOnAwake = false;
             gunEmpty.spatialBlend = 1f;
+            gunEmpty.volume = emptyVolume;
+        }
+    }
+
+    // Public methods to adjust volume at runtime
+    public void SetShootVolume(float volume)
+    {
+        shootVolume = Mathf.Clamp01(volume);
+        if (gunShoot != null)
+        {
+            gunShoot.volume = shootVolume;
+        }
+    }
+
+    public void SetEmptyVolume(float volume)
+    {
+        emptyVolume = Mathf.Clamp01(volume);
+        if (gunEmpty != null)
+        {
+            gunEmpty.volume = emptyVolume;
         }
     }
 
@@ -186,7 +216,7 @@ public class BaseGun : MonoBehaviour
         if (gunShoot != null && shootClip != null)
         {
             gunShoot.pitch = Random.Range(0.95f, 1.05f);
-            gunShoot.PlayOneShot(shootClip);
+            gunShoot.PlayOneShot(shootClip, shootVolume);
             Debug.Log("Bang!");
         }
     }
@@ -195,7 +225,7 @@ public class BaseGun : MonoBehaviour
     {
         if (gunEmpty != null && emptyClip != null)
         {
-            gunEmpty.PlayOneShot(emptyClip);
+            gunEmpty.PlayOneShot(emptyClip, emptyVolume);
             Debug.Log("you have no more ammo.");
         }
     }
@@ -235,10 +265,6 @@ public class BaseGun : MonoBehaviour
         newFirePoint.transform.localPosition = new Vector3(0, 0, 0.5f); // Adjust position as needed
         firePoint = newFirePoint.transform;
     }
-
-
-
-   
     
     // fix with time
     void OnCollisionEnter(Collision collision)
@@ -248,7 +274,7 @@ public class BaseGun : MonoBehaviour
             if (collision.gameObject.CompareTag("Enemy"))
             {
                 // Deal thrown weapon damage
-                float damage = bulletDamage * 4f;
+                float damage = bulletDamage * 10f;
                 DummyTarget dummy = collision.gameObject.GetComponent<DummyTarget>();
                 if (dummy != null)
                     dummy.TakeDamage(damage);

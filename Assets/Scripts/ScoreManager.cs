@@ -13,6 +13,10 @@ public class ScoreManager : MonoBehaviour
     public float coins = 0f;
     public float highScore = 0f;
 
+    [Header("Coin Settings")]
+    public int minCoinsPerKill = 1;
+    public int maxCoinsPerKill = 3;
+
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI coinsText;
     public TextMeshProUGUI highScoreText;
@@ -33,8 +37,15 @@ public class ScoreManager : MonoBehaviour
     public int GetCoinCount() => Mathf.FloorToInt(coins);
 
     public void AddKill() {
+        // Add score for the kill
         score += 10;
-        coins += 1;
+        
+        // Add random coins between minCoinsPerKill and maxCoinsPerKill
+        int coinsToAdd = Random.Range(minCoinsPerKill, maxCoinsPerKill + 1);
+        coins += coinsToAdd;
+        
+        // Optional: Log the coins added (for debugging)
+        Debug.Log($"Added {coinsToAdd} coins for kill. Total coins: {Mathf.FloorToInt(coins)}");
 
         if (score > highScore) {
             UpdateHighScore();
