@@ -2,7 +2,7 @@
 
 ## Overview
 **Sntruggled** is a VR zombie survival game where you fight off endless waves of cats using various gun weapons. Set in a world where you are a stuffed animal in a warehouse, you must find “a way out” through aim and exploration.
--Small video demo https://hovqr.to/b4dabe66
+Small video demo https://hovqr.to/b4dabe66
 
 ## Game Components
 ### Objects:
