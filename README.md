@@ -1,33 +1,29 @@
 # vr-lab-project: Virtual Reality (VR) FPS Game
 
 ## Overview
-**Sntruggled** is a VR zombie survival game where you and your stuffed animal friends 
-fight off endless waves of toys using various toy gun weapons. Set in a world where you are a stuffed animal in a toy store, you must find “a way out” through aim and exploration.
+**Sntruggled** is a VR zombie survival game where you fight off endless waves of cats using various gun weapons. Set in a world where you are a stuffed animal in a warehouse, you must find “a way out” through aim and exploration.
 
 ## Game Components
 ### Objects:
-- **Toy Gun Models:** Multiple toy gun types with different firearms, designs, and playstyles.
-- **Toy Machines:** Wave-spawner points for zombified toy enemies; can be delayed using in-game currency.
-- **Gated Sections:** Locked parts of the map that can be unlocked with in-game currency to explore new areas.
-- **Mystery Boxes:** Uses in-game currency to open and receive a random toy gun.
+- **Gun Models:** Multiple gun types with different firearms, designs, and playstyles.
+- **Spawners:** Wave-spawner points for cat enemies.
+- **Mystery Boxes:** Uses in-game coins to open and receive a random gun.
 
 ### Attributes:
-- **Physics Engine:** Somewhat accurate toy movement with ragdoll mechanics.
-- **Character Selection:** Different stuffed animals with unique designs and perks.
-- **Zombified Toy Enemies:** Zombified toys that follow the player, thinking they are playing a harmless game.
-- **Scoring System:** Based on rounds survived and the scoreboard.
-- **Currency System:** Earn currency by killing zombies and jamming toy-making machines.
-- **Multiplayer Mode:** Online multiplayer support for up to 4 players.
+- **Physics Engine:** Somewhat accurate cat animation with human-like movement.
+- **Cat Enemies:** Cats that follow the player, trying to feed the player a cupcake.
+- **Scoring System:** Based on the overall point score earned by killing cat enemies.
+- **Currency System:** Earn coins by killing cat enemies.
 
 ### Relationships:
 - **Player to Weapon:** Different firearms allow varied playstyles.
-- **Player to Environment:** Interaction with map unlocking, item unlocking, obstacles, and interactables.
+- **Player to Environment:** Interaction flashlight and mystery boxes.
 - **Player to Game World:** Immersive engagement through VR movement, aiming controls, and 3D spatial audio.
 
 ### Environments:
 - **Visual Settings:** Immersive map with expandable portions.
-- **Audio Landscape:** 3D spatial audio for zombie sounds, environmental effects, and in-game communications.
-- **User Interface:** HUD displaying health, ammo, in-game currency, and points.
+- **Audio Landscape:** 3D spatial audio for cat enemy sounds and environmental effects.
+- **User Interface:** HUD displaying health, ammo, coins, points, and wave spawn number/time countdown.
 - **VR Compatibility:** Support for leading VR headsets for an immersive experience.
 
 ## Development Timeline and Tasks
@@ -52,18 +48,17 @@ fight off endless waves of toys using various toy gun weapons. Set in a world wh
 
 ## Equipment and Software Requirements
 ### Hardware:
-- **VR Headsets:** Meta Quest 3, HTC Vive, Valve Index, or Pimax for development and testing.
+- **VR Headsets:** Meta Quest 3 for development and testing.
 - **Development Workstations:** High-performance PCs with NVIDIA RTX GPUs.
 - **Control Devices:** Standard game controllers.
 
 ### Software and Tools:
 - **Game Engine:** Unity with XR Toolkit.
-- **3D Modeling Software:** Blender.
-- **Networking Framework:** Photon Unity Networking (PUN) or Mirror for multiplayer.
-- **Audio Design Tools:** FMOD or Wwise for immersive sound.
-- **Version Control Systems:** Git or Perforce for source code and asset management.
+- **3D Modeling:** Unity's Asset Store.
+- **Audio Design Tools:** Unity's built-in sound editor.
+- **Version Control Systems:** GitHub for source code and asset management.
 
-By following this structured plan, the development team aims to deliver a high-quality VR Zombie Survival Game within a 1.5-month development timeframe.
+By following this structured plan, this development team aims to deliver a high-quality VR Zombie Survival Game within a 1.5-month development timeframe.
 
 ## Setup Instructions 
 
