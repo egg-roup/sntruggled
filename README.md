@@ -54,18 +54,18 @@
 
 ### Software and Tools:
 - **Game Engine:** Unity with XR Toolkit.
-- **3D Modeling:** Unity's Asset Store; Blendr.
+- **3D Modeling:** Unity's Asset Store; Blender.
 - **Audio Design Tools:** Unity's built-in sound editor.
 - **Version Control Systems:** GitHub for source code and asset management.
 
 By following this structured plan, this development team aims to deliver a high-quality VR Zombie Survival Game within a 1.5-month development timeframe.
 
 ## Setup Instructions 
-- Blendr, Unity, and this project should be installed
+- Blender, Unity, and this project should be installed
 - Open this project in Unity.
-- Once Blendr is installed, the assets should be loaded
-- If not, then open Blendr and drag the assets into it
-- Close Blendr then go to Unity and the scenes/assets should reload with the proper assets
+- Once Blender is installed, the assets should be loaded
+- If not, then open Blender and drag the assets into it
+- Close Blender then go to Unity and the scenes/assets should reload with the proper assets
 - As long as 1 Start Scene is the only scene loaded, pressing play on Unity should start the game just fine!
   
 ## Member Contributions 
